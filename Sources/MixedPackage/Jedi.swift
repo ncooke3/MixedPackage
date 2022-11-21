@@ -16,10 +16,16 @@ import Foundation
     public func duel(sith: Sith) -> Bool {
         // Only Master Yoda can defeat the Sith.
         if self.name == "Yoda" {
-            print("Master Jedi \(self.name) defeated Sith Lord \(sith.name)")
+            // We print using the C function defined in droid_debug.h.
+            DROID_DEBUG(
+                "Master Jedi \(self.name) defeated Sith Lord \(sith.name)"
+            );
             return true
         } else {
-            print("Sith Lord \(sith.name) defeated Master Jedi \(self.name)")
+            // We print using the C function defined in droid_debug.h.
+            DROID_DEBUG(
+                "Sith Lord \(sith.name) defeated Master Jedi \(self.name)"
+            );
             return false
         }
     }
