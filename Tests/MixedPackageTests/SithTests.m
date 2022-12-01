@@ -9,6 +9,11 @@
 // types.
 @import MixedPackage;
 
+// This import is made possible by the header search path in this test
+// target's declaration in the `Package.swift`. This header is not a public
+// header exposed by the `MixedPackage` module.
+#import "Sources/MixedPackage/SithRegistry.h"
+
 @interface SithTests : XCTestCase
 @end
 
@@ -32,6 +37,12 @@
 -  (void)testReadAncientSithTexts {
     Sith *sithLord = [[Sith alloc] initWithName:@"Dooku"];
     XCTAssertEqualObjects([sithLord readTheJediArchives], @"May the force be with you!\n");
+}
+
+// This test's purpose is to demonstrate that internal Objective-C types can
+// be tested.
+- (void)testTypeFromInternalHeader {
+    XCTAssertEqual(SithRegistry.registry.activeSithCount, 0);
 }
 
 @end

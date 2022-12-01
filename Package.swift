@@ -21,7 +21,13 @@ let package = Package(
         ),
         .testTarget(
             name: "MixedPackageTests",
-            dependencies: ["MixedPackage"]
+            dependencies: ["MixedPackage"],
+            cSettings: [
+                // Adding a header search path at the root of the package will
+                // enable the Objective-C tests to import internal headers from
+                // the MixedPackage target. See the `#import` in `SithTests.m`.
+            	.headerSearchPath("../../")
+            ]
         )
     ]
 )
