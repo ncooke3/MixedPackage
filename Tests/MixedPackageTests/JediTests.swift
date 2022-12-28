@@ -15,10 +15,10 @@ final class JediTests: XCTestCase {
     // Test that public Objective-C and Swift types are accessible.
     func testJedi() throws {
         // Native Swift type
-        let jediMaster = Jedi(name: "Yoda")
+        let jediMaster = Jedi(name: TestConstants.yoda)
         XCTAssertEqual(jediMaster.name, "Yoda")
 
-        let sithLord = try XCTUnwrap(Sith(name: "Sidious"))
+        let sithLord = try XCTUnwrap(Sith(name: TestConstants.sidious))
         XCTAssertEqual(sithLord.name, "Sidious")
 
         // Win, Yoda does.
@@ -37,6 +37,7 @@ final class JediTests: XCTestCase {
     func testReadAncientJediTexts() throws {
         let jediMaster = Jedi(name: "Luke")
         let contents = try jediMaster.readAncientJediTexts()
-        XCTAssertEqual(contents, "May the force be with you!\n")
+        // Compare against a constant defined in an Objective-C test helper.
+        XCTAssertEqual(contents, ObjcTestConstants.mayTheForceBeWithYouMessage())
     }
 }

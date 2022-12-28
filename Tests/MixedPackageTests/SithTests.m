@@ -14,6 +14,12 @@
 // header exposed by the `MixedPackage` module.
 #import "Sources/MixedPackage/SithRegistry.h"
 
+// Import test utilities defined in Swift.
+#import "MixedPackageTests-Swift.h"
+
+// Import test utilities defined in Objective-C.
+#import "ObjcTestConstants.h"
+
 @interface SithTests : XCTestCase
 @end
 
@@ -22,12 +28,12 @@
 // Test that public Objective-C and Swift types are accessible.
 - (void)testSithAndJedi {
     // Native Objective-C type
-    Sith *sithLord = [[Sith alloc] initWithName:@"Sidious"];
-    XCTAssertEqual(sithLord.name, @"Sidious");
+    Sith *sithLord = [[Sith alloc] initWithName:TestConstants.sidious];
+    XCTAssertEqualObjects(sithLord.name, @"Sidious");
 
     // Native Swift type
-    Jedi *jediMaster = [[Jedi alloc] initWithName:@"Yoda"];
-    XCTAssertEqual(jediMaster.name, @"Yoda");
+    Jedi *jediMaster = [[Jedi alloc] initWithName:TestConstants.yoda];
+    XCTAssertEqualObjects(jediMaster.name, @"Yoda");
 
     // Yoda always wins.
     XCTAssertFalse([sithLord duelWithJedi:jediMaster]);
@@ -36,7 +42,8 @@
 // Test that the target's resources were bundled correctly.
 -  (void)testReadAncientSithTexts {
     Sith *sithLord = [[Sith alloc] initWithName:@"Dooku"];
-    XCTAssertEqualObjects([sithLord readTheJediArchives], @"May the force be with you!\n");
+    XCTAssertEqualObjects([sithLord readTheJediArchives],
+                          [ObjcTestConstants mayTheForceBeWithYouMessage]);
 }
 
 // This test's purpose is to demonstrate that internal Objective-C types can
