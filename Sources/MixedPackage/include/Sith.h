@@ -5,12 +5,15 @@
 
 #import <Foundation/Foundation.h>
 
+// Import superclass as it cannot be forward declared.
+#import "ForceSensitiveBeing.h"
+
 // Forward declare any types defined in Swift.
 @class Jedi;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Sith : NSObject
+@interface Sith : ForceSensitiveBeing
 
 @property (copy, readonly, nonnull) NSString *name;
 
